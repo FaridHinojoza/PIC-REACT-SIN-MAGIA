@@ -19,31 +19,34 @@
 
             // Sabores de helado
             const itemName = <h2>Mora silvestre</h2>;
-            const itemName2 = <h2>Pictacho</h2>;
+            const itemName2 = <h2>Pistacho</h2>;
 
             // Descripciones de cada sabor de helado
             const itemDescription = (
-                <p class="menu-item-description">
+                <p className="menu-item-description">
                     Mora de Ambato con un toque de limón.
                 </p>
             );
 
             const itemDescription2 = (
-                <p class="menu-item-description">
+                <p className="menu-item-description">
                     Sabor suave con trozos de nuez.
                 </p>
             );
 
             // Items para cada sabor de helado
             const menuItem = (
-                <article class="menu-item">
+                <article className="menu-item">
                     {itemName}
+                    <img src="mora.svg" alt="Helado de mora silvestre" className="photo"/>
                     {itemDescription}
+                    <label htmlFor="description">Descripción </label>
+                    <input id="description" maxLength="120" readOnly className="field"/>
                 </article>
             );
 
             const menuItem2 = (
-                <article class="menu-item">
+                <article className="menu-item">
                     {itemName2}
                     {itemDescription2}
                 </article>
