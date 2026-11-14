@@ -4,26 +4,54 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>La heladería</title>
-        <link rel="icon" href="./favicon.ico">
+        <link rel="icon" href="./favicon.ico" />
+    </head>
+    <body>
+        <div id="root"></div>
         <script type="module">
             import React from "https://esm.sh/react@19.2.0?dev";
             import { createRoot } from "https://esm.sh/react-dom@19.2.0/client?dev";
-            console.log("React", React.version);
-            console.log("createRoot es una", typeof createRoot);
+
+            // Encabezado de la página web
+            const heading = React.createElement("h1", null, "La Heladería");
+
+            // Sabores de helado
+            const itemName = React.createElement("h2", null, "Mora silvestre");
+            const itemName2 = React.createElement("h2", null, "Pistacho");
+
+            // Descripciones de cada sabor de helado
+            const itemDescription = React.createElement(
+            "p",
+            { className: "menu-item-description" },
+            "Mora de Ambato con un toque de limón."
+            );
+
+            const itemDescription2 = React.createElement(
+            "p",
+            { className: "menu-item-description" },
+            "Sabor suave con trozos de nuez."
+            );
+
+            // Items para cada sabor de helado
+            const menuItem = React.createElement(
+            "article",
+            { className: "menu-item" },
+            itemName,
+            itemDescription
+            );
+
+            const menuItem2 = React.createElement(
+            "article",
+            { className: "menu-item" },
+            itemName2,
+            itemDescription2
+            );
+
+            // Menu con los diferentes sabores de helado
+            const menu = React.createElement("main", null, heading, menuItem, menuItem2);
+
+            // Creación del shadowroot y renderizado de su contenido en el DOM
+            createRoot(document.getElementById("root")).render(menu);
         </script>
-    </head>
-    <body>
-        <main>
-            <h2>La Heladería</h2>
-            <heladeria></heladeria>
-            <article>
-                <h2>Mora silvestre</h2>
-                <p>Mora de Ambato con un toque de limón.</p>
-            </article>
-            <article>
-                <h2>Pistacho</h2>
-                <p>Sabor suave y pequeños trozos de avellana.</p>
-            </article>
-        </main>
     </body>
 </html>
