@@ -1,0 +1,16 @@
+<svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 96 96"
+    width="96"
+    height="96"
+    role="img"
+    aria-hidden="true"
+>
+    <circle cx="48" cy="48" r="46" fill="#F2F5F3" />
+    <path d="M30 62 L48 88 L66 62 Z" fill="#C89B6A" />
+    <circle cx="48" cy="44" r="22" fill="#4B5D3A" />
+    <circle cx="38" cy="38" r="6" fill="#6B7F5F" />
+    <circle cx="55" cy="35" r="5" fill="#6B7F5F" />
+    <circle cx="52" cy="50" r="5" fill="#6B7F5F" />
+    <circle cx="39" cy="52" r="4" fill="#6B7F5F" />
+</svg>

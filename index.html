@@ -14,49 +14,99 @@
             import React from "https://esm.sh/react@19.2.0?dev";
             import { createRoot } from "https://esm.sh/react-dom@19.2.0/client?dev";
 
+            // Objetos en JS que contiene información sobre el item y su sabor de helado
+            const menuItemInf1 = {
+                id: 1,
+                iceCream: {
+                    id: 3,
+                    name: "Mora silvestre",
+                    imagePath: "images/mora.svg",
+                },
+                description: "Mora de Ambato con un toque de limón.",
+                price: 1.5,
+            };
+            const menuItemInf2 = {
+                id: 2,
+                iceCream: {
+                    id: 4,
+                    name: "Pistacho",
+                    imagePath: "images/pistacho.svg",
+                },
+                description: "Sabor suave con trozos de nuez.",
+                price: 1,
+            };
+
             // Encabezado de la página web
             const heading = <h1>La Heladería</h1>;
 
-            // Sabores de helado
-            const itemName = <h2 id="flavor-1">Mora silvestre</h2>;
-            const itemName2 = <h2>Pistacho</h2>;
-
-            // Descripciones de cada sabor de helado
-            const itemDescription = (
-                <p className="menu-item-description">
-                    Mora de Ambato con un toque de limón.
-                </p>
-            );
-
-            const itemDescription2 = (
-                <p className="menu-item-description">
-                    Sabor suave con trozos de nuez.
-                </p>
-            );
-
-            // Items para cada sabor de helado
+            // Items visuales para cada sabor de helado
             const menuItem = (
-                <article className="menu-item" aria-labelledby="flavor-mora">
-                    {itemName}
-                    <img src="mora.svg" alt="Helado de mora silvestre" className="photo"/>
-                    {itemDescription}
+                <article
+                    className="menu-item"
+                    aria-labelledby={`menu-item-${menuItemInf1.id}-name`}
+                >
+                    <img
+                        src={menuItemInf1.iceCream.imagePath}
+                        alt=""
+                        className="photo"
+                    />
+
+                    <h2 id={`menu-item-${menuItemInf1.id}-name`}>
+                        {menuItemInf1.iceCream.name}
+                    </h2>
+
+                    <p className="menu-item-description">
+                        {menuItemInf1.description}
+                    </p>
+
+                    <p>{menuItemInf1.price}</p>
+
                     <label htmlFor="description">Descripción </label>
-                    <input id="description" maxLength="120" readOnly className="field"/>
+                    <input
+                        id="description"
+                        maxLength="120"
+                        readOnly
+                        className="field"
+                    />
                 </article>
             );
-
             const menuItem2 = (
-                <article className="menu-item">
-                    {itemName2}
-                    <img src="pistacho.svg" alt="Helado de pistacho" className="photo"/>
-                    {itemDescription2}
-                    <label htmlFor="description">Descripción </label>
-                    <input id="description" maxLength="120" readOnly className="field"/>
-                </article>
+              <article
+                  className="menu-item"
+                  aria-labelledby={`menu-item-${menuItemInf2.id}-name`}
+              >
+                  <img
+                      src={menuItemInf2.iceCream.imagePath}
+                      alt=""
+                      className="photo"
+                  />
+
+                  <h2 id={`menu-item-${menuItemInf2.id}-name`}>
+                      {menuItemInf2.iceCream.name}
+                  </h2>
+
+                  <p className="menu-item-description">
+                      {menuItemInf2.description}
+                  </p>
+
+                  <p>{menuItemInf2.price}</p>
+
+                  <label htmlFor="description">Descripción </label>
+                  <input
+                      id="description"
+                      maxLength="120"
+                      readOnly
+                      className="field"
+                  />
+              </article>
             );
 
             // Pie de página para el menú
-            const footer = <footer><p>La Heladería -- Ambato</p></footer>;
+            const footer = (
+                <footer>
+                    <p>La Heladería -- Ambato</p>
+                </footer>
+            );
 
             // Menu con los diferentes sabores de helado
             const menu = (
@@ -69,7 +119,12 @@
 
             // Creación del shadowroot y renderizado de su contenido en el DOM
             const root = createRoot(document.getElementById("root"));
-            root.render(<>{menu}{footer}</>);
+            root.render(
+                <>
+                    {menu}
+                    {footer}
+                </>,
+            );
         </script>
     </body>
 </html>
