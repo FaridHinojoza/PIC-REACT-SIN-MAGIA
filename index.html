@@ -8,50 +8,59 @@
     </head>
     <body>
         <div id="root"></div>
-        <script type="module">
+
+        <script src="https://unpkg.com/@babel/standalone@8.0.4/babel.min.js"></script>
+        <script type="text/babel" data-type="module">
             import React from "https://esm.sh/react@19.2.0?dev";
             import { createRoot } from "https://esm.sh/react-dom@19.2.0/client?dev";
 
             // Encabezado de la página web
-            const heading = React.createElement("h1", null, "La Heladería");
+            const heading = <h1>La Heladería</h1>;
 
             // Sabores de helado
-            const itemName = React.createElement("h2", null, "Mora silvestre");
-            const itemName2 = React.createElement("h2", null, "Pistacho");
+            const itemName = <h2>Mora silvestre</h2>;
+            const itemName2 = <h2>Pictacho</h2>;
 
             // Descripciones de cada sabor de helado
             const itemDescription = React.createElement(
-            "p",
-            { className: "menu-item-description" },
-            "Mora de Ambato con un toque de limón."
+                "p",
+                { className: "menu-item-description" },
+                "Mora de Ambato con un toque de limón.",
             );
 
             const itemDescription2 = React.createElement(
-            "p",
-            { className: "menu-item-description" },
-            "Sabor suave con trozos de nuez."
+                "p",
+                { className: "menu-item-description" },
+                "Sabor suave con trozos de nuez.",
             );
 
             // Items para cada sabor de helado
             const menuItem = React.createElement(
-            "article",
-            { className: "menu-item" },
-            itemName,
-            itemDescription
+                "article",
+                { className: "menu-item" },
+                itemName,
+                itemDescription,
             );
 
             const menuItem2 = React.createElement(
-            "article",
-            { className: "menu-item" },
-            itemName2,
-            itemDescription2
+                "article",
+                { className: "menu-item" },
+                itemName2,
+                itemDescription2,
             );
 
             // Menu con los diferentes sabores de helado
-            const menu = React.createElement("main", null, heading, menuItem, menuItem2);
+            const menu = (
+                <main>
+                    {heading}
+                    {menuItem}
+                    {menuItem2}
+                </main>
+            );
 
             // Creación del shadowroot y renderizado de su contenido en el DOM
-            createRoot(document.getElementById("root")).render(menu);
+            const root = createRoot(document.getElementById("root"));
+            root.render(<>{menu}</>);
         </script>
     </body>
 </html>
