@@ -18,7 +18,7 @@
             const heading = <h1>La Heladería</h1>;
 
             // Sabores de helado
-            const itemName = <h2>Mora silvestre</h2>;
+            const itemName = <h2 id="flavor-1">Mora silvestre</h2>;
             const itemName2 = <h2>Pistacho</h2>;
 
             // Descripciones de cada sabor de helado
@@ -36,7 +36,7 @@
 
             // Items para cada sabor de helado
             const menuItem = (
-                <article className="menu-item">
+                <article className="menu-item" aria-labelledby="flavor-mora">
                     {itemName}
                     <img src="mora.svg" alt="Helado de mora silvestre" className="photo"/>
                     {itemDescription}
@@ -48,12 +48,15 @@
             const menuItem2 = (
                 <article className="menu-item">
                     {itemName2}
+                    <img src="pistacho.svg" alt="Helado de pistacho" className="photo"/>
                     {itemDescription2}
+                    <label htmlFor="description">Descripción </label>
+                    <input id="description" maxLength="120" readOnly className="field"/>
                 </article>
             );
 
             // Pie de página para el menú
-            const footer = <p>Todos nuestros sabores son 100% naturales</p>;
+            const footer = <footer><p>La Heladería -- Ambato</p></footer>;
 
             // Menu con los diferentes sabores de helado
             const menu = (
@@ -61,13 +64,12 @@
                     {heading}
                     {menuItem}
                     {menuItem2}
-                    {footer}
                 </main>
             );
 
             // Creación del shadowroot y renderizado de su contenido en el DOM
             const root = createRoot(document.getElementById("root"));
-            root.render(<>{menu}</>);
+            root.render(<>{menu}{footer}</>);
         </script>
     </body>
 </html>
