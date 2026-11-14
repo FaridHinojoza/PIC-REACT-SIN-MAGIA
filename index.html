@@ -22,32 +22,35 @@
             const itemName2 = <h2>Pictacho</h2>;
 
             // Descripciones de cada sabor de helado
-            const itemDescription = React.createElement(
-                "p",
-                { className: "menu-item-description" },
-                "Mora de Ambato con un toque de limón.",
+            const itemDescription = (
+                <p class="menu-item-description">
+                    Mora de Ambato con un toque de limón.
+                </p>
             );
 
-            const itemDescription2 = React.createElement(
-                "p",
-                { className: "menu-item-description" },
-                "Sabor suave con trozos de nuez.",
+            const itemDescription2 = (
+                <p class="menu-item-description">
+                    Sabor suave con trozos de nuez.
+                </p>
             );
 
             // Items para cada sabor de helado
-            const menuItem = React.createElement(
-                "article",
-                { className: "menu-item" },
-                itemName,
-                itemDescription,
+            const menuItem = (
+                <article class="menu-item">
+                    {itemName}
+                    {itemDescription}
+                </article>
             );
 
-            const menuItem2 = React.createElement(
-                "article",
-                { className: "menu-item" },
-                itemName2,
-                itemDescription2,
+            const menuItem2 = (
+                <article class="menu-item">
+                    {itemName2}
+                    {itemDescription2}
+                </article>
             );
+
+            // Pie de página para el menú
+            const footer = <p>Todos nuestros sabores son 100% naturales</p>;
 
             // Menu con los diferentes sabores de helado
             const menu = (
@@ -55,6 +58,7 @@
                     {heading}
                     {menuItem}
                     {menuItem2}
+                    {footer}
                 </main>
             );
 
