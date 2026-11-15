@@ -46,6 +46,14 @@
                     currency: "USD",
                 }).format(price);
 
+            // Expresión lambda (función pura) que aplica un descuento a un item (sabor de helado) específico
+            // y devuelve devuelve una copia con el precio actualizado
+            const withDiscount = (item, percent) => ({
+                ...item,
+                price: item.price * (1 - percent),
+            });
+            const rebajado = withDiscount(menuItemInf1, 0.2);
+
             // Encabezado de la página web
             const heading = <h1>La Heladería</h1>;
 
@@ -125,6 +133,17 @@
                 </article>
             );
 
+            // Expresiones lambda que añaden un nuevo item al menu
+            const menuTesting = [menuItem]
+            const addItemPush = (menuTesting, item) => { menuTesting.push(item); return menuTesting; };
+            const addItem = (menuTesting, item) => [...menuTesting, item];
+
+            addItemPush(menuTesting, rebajado);
+            console.log(menuTesting.length);
+
+            addItem(menuTesting, rebajado);
+            console.log(menuTesting.length);
+
             // Pie de página para el menú
             const footer = (
                 <footer>
@@ -132,7 +151,7 @@
                 </footer>
             );
 
-            // Menu con los diferentes sabores de helado
+            // Sección principal de la página
             const menu = (
                 <main>
                     {heading}
