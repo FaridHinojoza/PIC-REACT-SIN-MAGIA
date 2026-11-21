@@ -55,7 +55,7 @@
             const rebajado = withDiscount(menuItemInf1, 0.2);
 
             // Encabezado de la página web
-            const heading = <h1>La Heladería</h1>;
+            const Header = () => <h1>La Heladería</h1>;
 
             // Items visuales para cada sabor de helado
             const menuItem = (
@@ -134,8 +134,11 @@
             );
 
             // Expresiones lambda que añaden un nuevo item al menu
-            const menuTesting = [menuItem]
-            const addItemPush = (menuTesting, item) => { menuTesting.push(item); return menuTesting; };
+            const menuTesting = [menuItem];
+            const addItemPush = (menuTesting, item) => {
+                menuTesting.push(item);
+                return menuTesting;
+            };
             const addItem = (menuTesting, item) => [...menuTesting, item];
 
             addItemPush(menuTesting, rebajado);
@@ -144,20 +147,27 @@
             addItem(menuTesting, rebajado);
             console.log(menuTesting.length);
 
+            const Aviso = () => (
+              <p>Lunes a Viernes - de 8 AM a 8 PM</p>
+            );
+
             // Pie de página para el menú
-            const footer = (
+            const Footer = () => (
                 <footer>
-                    <p>La Heladería -- Ambato</p>
+                    <p>La Heladería — Ambato</p>
                 </footer>
             );
 
             // Sección principal de la página
             const menu = (
-                <main>
-                    {heading}
-                    {menuItem}
-                    {menuItem2}
-                </main>
+                <>
+                  <main>
+                    <Header/>
+                      {menuItem}
+                      {menuItem2}
+                  </main>
+                  <Footer/>
+                </>
             );
 
             // Creación del shadowroot y renderizado de su contenido en el DOM
@@ -165,7 +175,6 @@
             root.render(
                 <>
                     {menu}
-                    {footer}
                 </>,
             );
         </script>
