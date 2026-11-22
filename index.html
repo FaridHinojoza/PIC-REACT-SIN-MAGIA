@@ -54,129 +54,87 @@
             });
             const rebajado = withDiscount(menuItemInf1, 0.2);
 
-            // Encabezado de la página web
+            // Componente para el encabezado de la página web
             const Header = () => <h1>La Heladería</h1>;
 
-            // Items visuales para cada sabor de helado
-            const menuItem = (
+            // Componente parar tarjetas de helados
+            const MenuItem = ({ menuItem }) => (
                 <article
                     className="menu-item"
-                    aria-labelledby={`menu-item-${menuItemInf1.id}-name`}
+                    aria-labelledby={`menu-item-${menuItem.id}-name`}
                 >
-                    <img
-                        src={menuItemInf1.iceCream.imagePath}
-                        alt=""
-                        className="photo"
-                    />
-
-                    <h2 id={`menu-item-${menuItemInf1.id}-name`}>
-                        {menuItemInf1.iceCream.name}
+                    <img src={menuItem.iceCream.imagePath} alt="" />
+                    <h2 id={`menu-item-${menuItem.id}-name`}>
+                        {menuItem.iceCream.name}
                     </h2>
-
                     <p className="menu-item-description">
-                        {menuItemInf1.description}
+                        {menuItem.description}
                     </p>
-
-                    {/*llamada a la expresion lambda*/}
                     <p className="menu-item-price">
-                        {formatPrice(menuItemInf1.price)}
+                        {formatPrice(menuItem.price)}
                     </p>
-
-                    {/* uso de operador ternario para reflejar la disponibilidad actual del helado*/}
                     <p className="menu-item-stock">
-                        {menuItemInf1.inStock ? " Disponible hoy" : "Agotado"}
+                        {menuItem.inStock ? "Disponible hoy" : "Agotado"}
                     </p>
-
-                    <label htmlFor="description">Descripción </label>
-                    <input
-                        id="description"
-                        maxLength="120"
-                        readOnly
-                        className="field"
-                    />
-                </article>
-            );
-            const menuItem2 = (
-                <article
-                    className="menu-item"
-                    aria-labelledby={`menu-item-${menuItemInf2.id}-name`}
-                >
-                    <img
-                        src={menuItemInf2.iceCream.imagePath}
-                        alt=""
-                        className="photo"
-                    />
-
-                    <h2 id={`menu-item-${menuItemInf2.id}-name`}>
-                        {menuItemInf2.iceCream.name}
-                    </h2>
-
-                    <p className="menu-item-description">
-                        {menuItemInf2.description}
-                    </p>
-
-                    <p className="menu-item-price">
-                        {formatPrice(menuItemInf2.price)}
-                    </p>
-
-                    <p className="menu-item-stock">
-                        {menuItemInf2.inStock ? " Disponible hoy" : "Agotado"}
-                    </p>
-
-                    <label htmlFor="description">Descripción </label>
-                    <input
-                        id="description"
-                        maxLength="120"
-                        readOnly
-                        className="field"
-                    />
                 </article>
             );
 
-            // Expresiones lambda que añaden un nuevo item al menu
-            const menuTesting = [menuItem];
-            const addItemPush = (menuTesting, item) => {
-                menuTesting.push(item);
-                return menuTesting;
-            };
-            const addItem = (menuTesting, item) => [...menuTesting, item];
-
-            addItemPush(menuTesting, rebajado);
-            console.log(menuTesting.length);
-
-            addItem(menuTesting, rebajado);
-            console.log(menuTesting.length);
-
-            const Aviso = () => (
-              <p>Lunes a Viernes - de 8 AM a 8 PM</p>
+            // Componente para probar el recibimiento de props sueltas
+            const MenuItemPlano = ({ name, description, price, inStock }) => (
+                <article
+                    className="menu-item"
+                >
+                    <h2>
+                        {name}
+                    </h2>
+                    <p className="menu-item-description">
+                        {description}
+                    </p>
+                    <p className="menu-item-price">
+                        {formatPrice(price)}
+                    </p>
+                    <p className="menu-item-stock">
+                        {inStock ? "Disponible hoy" : "Agotado"}
+                    </p>
+                </article>
             );
 
-            // Pie de página para el menú
+            // Método para añadir un nuevo item al menu (función impura)
+            const addItemPush = (menu, item) => {
+                 menu.push(item);
+                 return menu;
+             };
+
+            // Método para añadir un nuevo item al menú (función pura)
+            const addItem = (menu, item) => [...menu, item];
+
+            // Componente para horario de la heladería
+            const Aviso = () => <p>Lunes a Viernes - de 8 AM a 8 PM</p>;
+
+            // Componente para pie de página para el menú
             const Footer = () => (
                 <footer>
                     <p>La Heladería — Ambato</p>
                 </footer>
             );
 
-            // Sección principal de la página
-            const menu = (
+            // Componente para el menú de la heladería
+            const Menu = () => (
                 <>
-                  <main>
-                    <Header/>
-                      {menuItem}
-                      {menuItem2}
-                  </main>
-                  <Footer/>
+                    <main>
+                        <Header />
+                        <MenuItem menuItem = {menuItemInf1} />
+                        <MenuItem menuItem = {menuItemInf2} />
+                        <MenuItemPlano name = {menuItemInf1.iceCream.name} description = {menuItemInf1.iceCream.description} price = {menuItemInf1.price} inStock = {menuItemInf1.inStock} />
+                        <MenuItemPlano name = {menuItemInf2.iceCream.name} description = {menuItemInf2.iceCream.description} price = {menuItemInf2.price} inStock = {menuItemInf2.inStock} />
+                    </main>
+                    <Footer />
                 </>
             );
 
             // Creación del shadowroot y renderizado de su contenido en el DOM
             const root = createRoot(document.getElementById("root"));
-            root.render(
-                <>
-                    {menu}
-                </>,
-            );
+            root.render(<><Menu /></>);
         </script>
     </body>
 </html>
