@@ -16,7 +16,7 @@
             import { createRoot } from "https://esm.sh/react-dom@19.2.0/client?dev";
 
             // Objetos en JS que contiene información sobre el item y su sabor de helado
-            const menuItemInf1 = {
+            const menuItem1 = {
                 id: 1,
                 iceCream: {
                     id: 3,
@@ -27,7 +27,7 @@
                 price: 12,
                 inStock: false,
             };
-            const menuItemInf2 = {
+            const menuItem2 = {
                 id: 2,
                 iceCream: {
                     id: 4,
@@ -52,7 +52,7 @@
                 ...item,
                 price: item.price * (1 - percent),
             });
-            const rebajado = withDiscount(menuItemInf1, 0.2);
+            // const rebajado = withDiscount(menuItem1, 0.2);
 
             // Componente para el encabezado de la página web
             const Header = () => <h1>La Heladería</h1>;
@@ -64,9 +64,9 @@
                     aria-labelledby={`menu-item-${menuItem.id}-name`}
                 >
                     <img src={menuItem.iceCream.imagePath} alt="" />
-                    <h2 id={`menu-item-${menuItem.id}-name`}>
+                    <h3 id={`menu-item-${menuItem.id}-name`}>
                         {menuItem.iceCream.name}
-                    </h2>
+                    </h3>
                     <p className="menu-item-description">
                         {menuItem.description}
                     </p>
@@ -80,36 +80,33 @@
             );
 
             // Componente para probar el recibimiento de props sueltas
-            const MenuItemPlano = ({ name, description, price, inStock }) => (
-                <article
-                    className="menu-item"
-                >
-                    <h2>
-                        {name}
-                    </h2>
-                    <p className="menu-item-description">
-                        {description}
-                    </p>
-                    <p className="menu-item-price">
-                        {formatPrice(price)}
-                    </p>
-                    <p className="menu-item-stock">
-                        {inStock ? "Disponible hoy" : "Agotado"}
-                    </p>
-                </article>
-            );
+            // const MenuItemPlano = ({ name, description, price, inStock }) => (
+            //     <article className="menu-item">
+            //         <h2>{name}</h2>
+            //         <p className="menu-item-description">{description}</p>
+            //         <p className="menu-item-price">{formatPrice(price)}</p>
+            //         <p className="menu-item-stock">
+            //             {inStock ? "Disponible hoy" : "Agotado"}
+            //         </p>
+            //     </article>
+            // );
 
             // Método para añadir un nuevo item al menu (función impura)
-            const addItemPush = (menu, item) => {
-                 menu.push(item);
-                 return menu;
-             };
+            // const addItemPush = (menu, item) => {
+            //     menu.push(item);
+            //     return menu;
+            // };
 
             // Método para añadir un nuevo item al menú (función pura)
-            const addItem = (menu, item) => [...menu, item];
+            // const addItem = (menu, item) => [...menu, item];
 
             // Componente para horario de la heladería
-            const Aviso = () => <p>Lunes a Viernes - de 8 AM a 8 PM</p>;
+            const Aviso = ({ children }) => (
+                <aside>
+                    <p>¡Mira este sabor!</p>
+                    {children}
+                </aside>
+            );
 
             // Componente para pie de página para el menú
             const Footer = () => (
@@ -119,14 +116,22 @@
             );
 
             // Componente para el menú de la heladería
-            const Menu = () => (
+            const Menu = ({ children }) => (
+                <section className="menu" aria-labelledby="menu-title">
+                    <h2 id="menu-title">Sabores de hoy</h2>
+                    {children}
+                </section>
+            );
+
+            // "Componente" raíz (está escrito en camelCase)
+            const app = (
                 <>
                     <main>
                         <Header />
-                        <MenuItem menuItem = {menuItemInf1} />
-                        <MenuItem menuItem = {menuItemInf2} />
-                        <MenuItemPlano name = {menuItemInf1.iceCream.name} description = {menuItemInf1.iceCream.description} price = {menuItemInf1.price} inStock = {menuItemInf1.inStock} />
-                        <MenuItemPlano name = {menuItemInf2.iceCream.name} description = {menuItemInf2.iceCream.description} price = {menuItemInf2.price} inStock = {menuItemInf2.inStock} />
+                        <Menu>
+                          <Aviso children = {<MenuItem menuItem={menuItem1} />} />
+                          <Aviso children = {<MenuItem menuItem={menuItem2} />} />
+                        </Menu>
                     </main>
                     <Footer />
                 </>
@@ -134,7 +139,7 @@
 
             // Creación del shadowroot y renderizado de su contenido en el DOM
             const root = createRoot(document.getElementById("root"));
-            root.render(<><Menu /></>);
+            root.render(<>{app}</>);
         </script>
     </body>
 </html>
