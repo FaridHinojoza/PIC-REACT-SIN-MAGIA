@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>La heladería</title>
+        <link rel="icon" href="./favicon.ico" />
+    </head>
+    <body>
+        <div id="root"></div>
+
+        <!--inclusión de React y Babel en el proyecto desde CDN-->
+        <script src="https://unpkg.com/@babel/standalone@8.0.4/babel.min.js"></script>
+        <script type="text/babel" data-type="module">
+            import React from "https://esm.sh/react@19.2.0?dev";
+            import { createRoot } from "https://esm.sh/react-dom@19.2.0/client?dev";
+
+            // Objetos en JS que contiene información sobre el item y su sabor de helado
+            const menuItem1 = {
+                id: 1,
+                iceCream: {
+                    id: 3,
+                    name: "Mora silvestre",
+                    imagePath: "images/mora.svg",
+                },
+                description: "Mora de Ambato con un toque de limón.",
+                price: 12,
+                inStock: false,
+            };
+            const menuItem2 = {
+                id: 2,
+                iceCream: {
+                    id: 4,
+                    name: "Pistacho",
+                    imagePath: "images/pistacho.svg",
+                },
+                description: "Sabor suave con trozos de nuez.",
+                price: 1,
+                inStock: true,
+            };
+
+            // Expresión lambda que adapta el formato del precio del helado
+            const formatPrice = (price) =>
+                new Intl.NumberFormat("es-EC", {
+                    style: "currency",
+                    currency: "USD",
+                }).format(price);
+
+            // Expresión lambda (función pura) que aplica un descuento a un item (sabor de helado) específico
+            // y devuelve devuelve una copia con el precio actualizado
+            const withDiscount = (item, percent) => ({
+                ...item,
+                price: item.price * (1 - percent),
+            });
+            // const rebajado = withDiscount(menuItem1, 0.2);
+
+            // Componente para el encabezado de la página web
+            const Header = () => <h1>La Heladería</h1>;
+
+            // Componente parar tarjetas de helados
+            const MenuItem = ({ menuItem }) => (
+                <article
+                    className="menu-item"
+                    aria-labelledby={`menu-item-${menuItem.id}-name`}
+                >
+                    <img src={menuItem.iceCream.imagePath} alt="" />
+                    <h3 id={`menu-item-${menuItem.id}-name`}>
+                        {menuItem.iceCream.name}
+                    </h3>
+                    <p className="menu-item-description">
+                        {menuItem.description}
+                    </p>
+                    <p className="menu-item-price">
+                        {formatPrice(menuItem.price)}
+                    </p>
+                    <p className="menu-item-stock">
+                        {menuItem.inStock ? "Disponible hoy" : "Agotado"}
+                    </p>
+                </article>
+            );
+
+            // Componente para probar el recibimiento de props sueltas
+            // const MenuItemPlano = ({ name, description, price, inStock }) => (
+            //     <article className="menu-item">
+            //         <h2>{name}</h2>
+            //         <p className="menu-item-description">{description}</p>
+            //         <p className="menu-item-price">{formatPrice(price)}</p>
+            //         <p className="menu-item-stock">
+            //             {inStock ? "Disponible hoy" : "Agotado"}
+            //         </p>
+            //     </article>
+            // );
+
+            // Método para añadir un nuevo item al menu (función impura)
+            // const addItemPush = (menu, item) => {
+            //     menu.push(item);
+            //     return menu;
+            // };
+
+            // Método para añadir un nuevo item al menú (función pura)
+            // const addItem = (menu, item) => [...menu, item];
+
+            // Componente para horario de la heladería
+            const Aviso = ({ children }) => (
+                <aside>
+                    <p>¡Mira este sabor!</p>
+                    {children}
+                </aside>
+            );
+
+            // Componente para pie de página para el menú
+            const Footer = () => (
+                <footer>
+                    <p>La Heladería — Ambato</p>
+                </footer>
+            );
+
+            // Componente para el menú de la heladería
+            const Menu = ({ children }) => (
+                <section className="menu" aria-labelledby="menu-title">
+                    <h2 id="menu-title">Sabores de hoy</h2>
+                    {children}
+                </section>
+            );
+
+            // "Componente" raíz (está escrito en camelCase)
+            const app = (
+                <>
+                    <main>
+                        <Header />
+                        <Menu>
+                          <Aviso children = {<MenuItem menuItem={menuItem1} />} />
+                          <Aviso children = {<MenuItem menuItem={menuItem2} />} />
+                        </Menu>
+                    </main>
+                    <Footer />
+                </>
+            );
+
+            // Creación del shadowroot y renderizado de su contenido en el DOM
+            const root = createRoot(document.getElementById("root"));
+            root.render(<>{app}</>);
+        </script>
+    </body>
+</html>
