@@ -2,6 +2,7 @@ import Footer from "./components/Footer.jsx";
 import Header from "./components/Header.jsx";
 import Menu from "./components/Menu.jsx";
 import MenuItem from "./components/MenuItem.jsx";
+import Aviso from "./components/Aviso.jsx";
 
 const menuItem = {
   id: 1,
@@ -39,6 +40,7 @@ const App = () => {
         </Menu>
       </main>
       <br />
+      <Aviso />
       <Footer />
     </>
   );
